@@ -2,8 +2,8 @@
   "dependencies": {
     "bootstrap": "^5.3.3"
   },
-  "scripts":{
-    "dev":"php -S localhost:3000",
-    "admin":" php -S localhost:4000 admin/admin.html"
+  "scripts": {
+    "dev": "php -S localhost:3000",
+    "admin": " php -S localhost:4000 admin/admin.html"
   }
 }
