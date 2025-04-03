@@ -96,7 +96,7 @@ $result = $con->query($sql_products);
                                 <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
                                 <input type="hidden" name="product_name" value="<?php echo $row['product_name']; ?>">
                                 <input type="hidden" name="price" value="<?php echo $row['price']; ?>">
-                                <button type="submit" name="add_to_cart" class="btn btn-update w-100">Add to Cart</button>
+                                <button type="submit" name="add_to_cart" class="btn w-100">Add to Cart</button>
                             </form>
                         </div>
                     </div>
