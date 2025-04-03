@@ -230,6 +230,10 @@ h1 {
   color: white;
   border: none;
 }
+
+.form-label{
+    text-align: start;
+}
 .footer {
   margin-top: 2rem;
   font-size: 0.9rem;
