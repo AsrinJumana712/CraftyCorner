@@ -1,0 +1,231 @@
+body {
+  background-image: url("../bg_image.jpeg");
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  color: #343a40;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #343a40;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.header_name {
+  color: #d19275;
+}
+.card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+  background-color: #4f4f4f;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 15px 15px 0 0;
+}
+
+.btn {
+  background-color: #d19275;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background-color: #a16653;
+}
+
+.navbar-custom {
+  background-color: #333;
+}
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link {
+  color: white;
+}
+.navbar-brand {
+  font-family: "Lucida Handwriting", cursive;
+}
+.navbar-custom .nav-link:hover {
+  color: #ffcc00;
+}
+.card-custom {
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 30px;
+  text-align: center;
+}
+.card-custom-header {
+  background-color: #4f4f4f;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 12px;
+}
+.card-body-custom {
+  padding: 25px;
+}
+.btn-custom {
+  background-color: #d19275;
+  color: white;
+  border-radius: 30px;
+  font-weight: 600;
+  width: 100%;
+}
+.btn-custom:hover {
+  background-color: #d19275;
+}
+
+.product-card {
+  max-width: 280px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  padding: 15px;
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease-in-out;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.product-card h5 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.product-card p {
+  font-size: 0.95rem;
+  color: #666;
+  text-align: center;
+}
+
+.price-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #032178;
+  color: white;
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.btn-update {
+  background-color: #f5a623;
+  color: white;
+  font-size: 1rem;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.btn-update:hover {
+  background-color: #d98c1a;
+}
+
+.btn-delete {
+  background-color: #c82333;
+  color: white;
+  font-size: 1rem;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.btn-delete:hover {
+  background-color: #a71d2a;
+}
+
+.cart-card-body {
+  padding: 15px;
+}
+.cart-card-body h5 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.cart-card-body .btn {
+  margin-top: 10px;
+  width: 100%;
+}
+.total-price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 20px;
+}
+.btn-clear {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+}
+.btn-clear:hover {
+  background-color: #ff1a1a;
+}
+.btn-continue,
+.btn-checkout {
+  background-color: #28a745;
+  color: white;
+}
+.btn-continue:hover,
+.btn-checkout:hover {
+  background-color: #218838;
+}
+.cart-table td {
+  vertical-align: middle;
+  padding: 15px;
+}
+.cart-table th {
+  text-align: center;
+  padding: 12px 15px;
+}
+
+.btn-update {
+  background-color: #f39c12;
+  color: white;
+  border: none;
+}
+.footer {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #6c757d;
+  text-align: center;
+}
