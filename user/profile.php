@@ -34,8 +34,7 @@ if ($user_result->num_rows > 0) {
 </head>
 
 <body>
-
-    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+<nav class="navbar navbar-expand-lg navbar-custom sticky-top">
         <div class="container">
             <a class="navbar-brand" href="dashboard.php">Crafty<span class="header_name">Corner</span> </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -44,18 +43,10 @@ if ($user_result->num_rows > 0) {
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="cart.php">Cart</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="order_history.php">Orders</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="profile.php">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../logout.php">Logout</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>
+                    <li class="nav-item"><a class="nav-link" href="order_history.php">Orders</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../logout.php">Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -66,19 +57,21 @@ if ($user_result->num_rows > 0) {
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body text-center">
-                    <div class="card-custom-header">Your Profile</div>
-                    <div class="card-body card-body-custom text-center">
-                        <?php
-                        $profile_image = !empty($user['ProfilePicture']) ? "../uploads/" . $user['ProfilePicture'] : "../uploads/default.png";
-                        ?>
-                        <img src="<?php echo $profile_image; ?>" class="rounded-circle mb-3" alt="Profile Picture"
-                            width="150" height="150">
-                        <p><strong>Name:</strong> <?php echo $user['username']; ?></p>
-                        <p><strong>Email:</strong> <?php echo $user['email']; ?></p>
-                        <p><strong>Contact Number:</strong> <?php echo $user['mob_no']; ?></p>
-                        <a href="edit_profile.php" class="btn btn-danger">Edit Profile</a>
-                    </div>
+                        <div class="card-custom-header">Your Profile</div>
+                        <div class="card-body card-body-custom text-center">
+                            <?php
+                            $profile_image = !empty($user['ProfilePicture']) ? "../uploads/" . $user['ProfilePicture'] : "../uploads/default.png";
+                            ?>
+                            <img src="<?php echo $profile_image; ?>" class="rounded-circle mb-3" alt="Profile Picture"
+                                width="150" height="150">
+                            <p><strong>Name:</strong> <?php echo $user['username']; ?></p>
+                            <p><strong>Email:</strong> <?php echo $user['email']; ?></p>
+                            <p><strong>Contact Number:</strong> <?php echo $user['mob_no']; ?></p>
+                            <p><strong>Home Address:</strong> <?php echo $user['home_address']; ?></p> <!-- Display Address -->
+                            <a href="edit_profile.php" class="btn btn-danger">Edit Profile</a>
+                        </div>
 
+                    </div>
                 </div>
             </div>
         </div>

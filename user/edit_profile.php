@@ -18,6 +18,7 @@ $user = $user_result->fetch_assoc();
 if (isset($_POST['update'])) {
     $email = $con->real_escape_string($_POST['email']);
     $mob_no = $con->real_escape_string($_POST['mob_no']);
+    $home_address = $con->real_escape_string($_POST['home_address']);
     $password = !empty($_POST['password']) ? $con->real_escape_string($_POST['password']) : $user['password'];
 
     $password_update = !empty($_POST['password']) ? ", password='$password'" : '';
@@ -48,7 +49,7 @@ if (isset($_POST['update'])) {
     }
 
     // Update User Data
-    $sql_update = "UPDATE Users SET email='$email', mob_no='$mob_no' $password_update $profile_picture_update WHERE username='$username'";
+    $sql_update = "UPDATE Users SET email='$email', mob_no='$mob_no' , home_address='$home_address' $password_update $profile_picture_update WHERE username='$username'";
 
     if ($con->query($sql_update) === TRUE) {
         echo "<p class='text-success text-center'>Profile updated successfully!</p>";
@@ -73,8 +74,7 @@ if (isset($_POST['update'])) {
 </head>
 
 <body>
-
-    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+<nav class="navbar navbar-expand-lg navbar-custom sticky-top">
         <div class="container">
             <a class="navbar-brand" href="dashboard.php">Crafty<span class="header_name">Corner</span> </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -83,18 +83,10 @@ if (isset($_POST['update'])) {
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="cart.php">Cart</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="order_history.php">Orders</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="profile.php">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../logout.php">Logout</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>
+                    <li class="nav-item"><a class="nav-link" href="order_history.php">Orders</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../logout.php">Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -123,6 +115,12 @@ if (isset($_POST['update'])) {
                                 <label for="mob_no" class="form-label">Mobile Number</label>
                                 <input type="text" name="mob_no" class="form-control"
                                     value="<?php echo $user['mob_no']; ?>" required>
+                            </div>
+
+                            <div class="mb-3 text-start">
+                                <label for="home_address" class="form-label">Home Address</label>
+                                <input type="text" name="home_address" class="form-control"
+                                    value="<?php echo $user['home_address']; ?>" required>
                             </div>
 
                             <div class="mb-3 text-start">

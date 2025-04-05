@@ -76,6 +76,26 @@
   color: #555;
 }
 
+a{
+  text-decoration: none;
+  color: black;
+}
+
+.success-container {
+  max-width: 450px;
+  margin: auto;
+  padding: 30px;
+  text-align: center;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 50px;
+}
+.success-icon {
+  font-size: 60px;
+  color: #28a745;
+}
+
 body {
   background-image: url("../bg_image.jpeg");
   background-size: cover;

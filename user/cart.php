@@ -38,7 +38,7 @@ function updateCart($quantities, $selected_items)
 {
     foreach ($quantities as $product_id => $quantity) {
         if ($quantity > 0) {
-            $_SESSION['cart'][$product_id]['quantity'] = $quantity;
+            $_SESSION['cart'][$product_id]['quantity'] = (int)$quantity;
         } else {
             removeFromCart($product_id);
         }
@@ -61,12 +61,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } elseif (isset($_POST['update_cart'])) {
         updateCart($_POST['quantity'], $_POST['selected_items'] ?? []);
     } elseif (isset($_POST['checkout_selected']) && !empty($_POST['selected_items'])) {
-        $_SESSION['checkout_items'] = $_POST['selected_items'];
-        header("Location: checkout.php");
+        // 1. Update cart quantities based on POST
+        if (isset($_POST['quantity'])) {
+            updateCart($_POST['quantity'], $_POST['selected_items']);
+        }
+    
+        // 2. Set checkout items based on updated cart
+        $_SESSION['checkout_items'] = array_intersect_key($_SESSION['cart'], array_flip($_POST['selected_items']));
+    
+        // 3. Redirect
+        header("Location: checkout_confirm.php");
         exit();
     }
-    header("Location: cart.php");
-    exit();
+    
 }
 
 // Handle remove and clear actions
@@ -89,7 +96,7 @@ if (isset($_GET['clear'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Shopping cart</title>
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css">
     <script src="../bootstrap/dist/js/bootstrap.js"></script>
     <link rel="stylesheet" href="../CSS/style.css">
@@ -118,8 +125,7 @@ if (isset($_GET['clear'])) {
     <div class="container mt-4 d-flex">
         <div class="cart-container flex-grow-1">
             <?php if (!empty($_SESSION['cart'])) { ?>
-                <form method="POST" action="cart.php" class="d-flex">
-
+                <form method="POST" action="cart.php" class="d-flex" id="cartForm">
                     <div class="cart-list w-75">
                         <div class="mb-3">
                             <input type="checkbox" id="select-all" class="form-check-input">
@@ -144,6 +150,7 @@ if (isset($_GET['clear'])) {
                                 <div class="cart-item d-flex align-items-center">
                                     <input type="checkbox" name="selected_items[]" value="<?php echo $product_id; ?>"
                                         class="select-item me-2" <?php echo isset($_SESSION['selected_items'][$product_id]) ? 'checked' : ''; ?>>
+
                                     <img src="<?php echo $image_path; ?>" alt="<?php echo $product['product_name']; ?>"
                                         class="cart-item-image me-2">
 
@@ -186,14 +193,17 @@ if (isset($_GET['clear'])) {
                     <div class="checkout-info w-25 p-3 border-warning rounded ms-3 shadow-sm">
                         <h5>Checkout Summary</h5>
                         <div id="selected_products"></div>
-                        <p><strong>Total Price: LKR <span id="selected_total">0.00</span></strong></p>
-                        <button type="submit" name="checkout_selected" class="btn btn-primary w-100">Proceed to Checkout</button>
+                        <p><strong>Total Price: LKR <span id="selected_total"><?php echo number_format($total_price, 2); ?></span></strong></p>
+                        <button type="submit" name="checkout_selected" class="btn btn-primary w-100">Proceed to
+                            Checkout</button>
                     </div>
-
                 </form>
 
             <?php } else { ?>
                 <p class="text-center">Your cart is empty.</p>
+                <div class="text-center">
+                    <a href="dashboard.php" class="btn btn-primary">Browse Products</a>
+                </div>
             <?php } ?>
         </div>
     </div>
