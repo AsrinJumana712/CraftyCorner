@@ -35,29 +35,24 @@ $checkout_items = $_SESSION['checkout_items'];
 
 // Debugging: Uncomment to check session values
 // echo "<pre>"; print_r($checkout_items); echo "</pre>";
+$cart_items = $_SESSION['cart'] ?? [];
+$total_price = array_reduce($cart_items, function ($sum, $item) {
+    return $sum + ($item['price'] * $item['quantity']);
+}, 0);
 
 // Calculate total price of selected items
 $total_price = 0;
 foreach ($checkout_items as &$item) { // Pass by reference to update session
-    $item['quantity'] = (int) $item['quantity'];
-    $item['price'] = (float) $item['price'];
+    $item['quantity'] = (int)$item['quantity'];
+    $item['price'] = (float)$item['price'];
     $total_price += $item['price'] * $item['quantity'];
 }
 unset($item); // Prevent accidental reference issues
 
 // Dummy payment methods (Replace with DB query in real scenario)
 $payment_methods = [
-    ["type" => "Visa", "masked_number" => "**** **** **** ****"]
+    ["type" => "Visa", "masked_number" => "**** **** **** 1234"]
 ];
-
-// Check if card details exist in session
-$savedCard = $_SESSION['saved_card'] ?? null;
-
-// If the saved card doesn't exist, redirect to add card page
-if (!$savedCard) {
-    header("Location: add_card.php");
-    exit();
-}
 ?>
 
 <!DOCTYPE html>
@@ -114,16 +109,14 @@ if (!$savedCard) {
                         <div class="mb-4">
                             <h5 class="fw-bold">Payment Methods</h5>
                             <form>
-                                <!-- Display the saved card -->
-                                <?php if ($savedCard): ?>
+                                <?php foreach ($payment_methods as $index => $method): ?>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="payment" checked>
+                                        <input class="form-check-input" type="radio" name="payment" <?= $index === 0 ? 'checked' : '' ?>>
                                         <label class="form-check-label">
-                                            <?= htmlspecialchars($savedCard['type']) . " " . htmlspecialchars($savedCard['masked_number']); ?>
+                                            <?= htmlspecialchars($method['type']) . " " . htmlspecialchars($method['masked_number']); ?>
                                         </label>
                                     </div>
-                                <?php endif; ?>
-                                <!-- Option to add a new card -->
+                                <?php endforeach; ?>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="payment">
                                     <label class="form-check-label"><a href="add_card.php">Add a new card</a></label>
@@ -131,15 +124,13 @@ if (!$savedCard) {
                             </form>
                         </div>
 
-
                         <!-- Order Summary -->
                         <div class="mb-4">
                             <h5 class="fw-bold">Order Summary</h5>
                             <ul class="list-group mb-3">
-                                <?php foreach ($checkout_items as $item): ?>
+                                <?php foreach ($cart_items as $item) : ?>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <span><?= htmlspecialchars($item['product_name']) ?>
-                                            (x<?= (int) $item['quantity'] ?>)</span>
+                                        <span><?= htmlspecialchars($item['product_name']) ?> (x<?= (int)$item['quantity'] ?>)</span>
                                         <span>LKR <?= number_format($item['price'] * $item['quantity'], 2) ?></span>
                                     </li>
                                 <?php endforeach; ?>
@@ -168,7 +159,6 @@ if (!$savedCard) {
             }
         }
     </script>
-    <script src="../JavaScript/script.js"></script>
+<script src="../JavaScript/script.js"></script>
 </body>
-
 </html>

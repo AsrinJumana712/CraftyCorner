@@ -2,21 +2,22 @@
 require('../config.php');
 session_start();
 
-// Check if the user is logged in
+// Ensure the user is logged in
 if (!isset($_SESSION['username'])) {
     header("Location: index.php");
     exit;
 }
 
+// Retrieve user ID from session or database
 $username = $_SESSION['username'];
 $sql_user = "SELECT * FROM Users WHERE username='$username'";
 $user_result = $con->query($sql_user);
 $user = $user_result->fetch_assoc();
 
-// Fetch all orders for the user with product images
-$sql_orders = "SELECT o.order_id, o.order_date, o.status, o.total_amount, p.product_name, p.image
-               FROM Orders o 
-               JOIN Products p ON o.product_id = p.id 
+// Fetch all orders for the user with product details (including quantity)
+$sql_orders = "SELECT o.order_id, o.order_date, o.status, o.total_amount, p.product_name, p.image, o.quantity
+               FROM Orders o
+               JOIN Products p ON o.product_id = p.id
                WHERE o.user_id = '".$user['id']."' 
                ORDER BY o.order_date DESC";
 $orders_result = $con->query($sql_orders);
@@ -42,18 +43,10 @@ $orders_result = $con->query($sql_orders);
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="cart.php">Cart</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="order_history.php">Orders</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="profile.php">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../logout.php">Logout</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>
+                <li class="nav-item"><a class="nav-link" href="order_history.php">Orders</a></li>
+                <li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href="../logout.php">Logout</a></li>
             </ul>
         </div>
     </div>
@@ -74,6 +67,7 @@ $orders_result = $con->query($sql_orders);
                                 <strong>Order ID:</strong> <?php echo $order['order_id']; ?><br>
                                 <strong>Order Date:</strong> <?php echo $order['order_date']; ?><br>
                                 <strong>Status:</strong> <?php echo $order['status']; ?><br>
+                                <strong>Quantity:</strong> <?php echo $order['quantity']; ?><br>
                                 <strong>Total:</strong> $<?php echo number_format($order['total_amount'], 2); ?>
                             </p>
                             <a href="view_order.php?id=<?php echo $order['order_id']; ?>" class="btn btn-warning btn-sm">View</a>
@@ -89,8 +83,10 @@ $orders_result = $con->query($sql_orders);
         <?php } ?>
     </div>
 </div>
+
 <div class="footer">
-      <p>&copy; 2025 Crafty Corner. All Rights Reserved.</p>
-    </div>
+    <p>&copy; 2025 Crafty Corner. All Rights Reserved.</p>
+</div>
+
 </body>
 </html>

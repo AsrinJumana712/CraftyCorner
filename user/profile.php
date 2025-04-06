@@ -34,7 +34,7 @@ if ($user_result->num_rows > 0) {
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
         <div class="container">
             <a class="navbar-brand" href="dashboard.php">Crafty<span class="header_name">Corner</span> </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -67,7 +67,8 @@ if ($user_result->num_rows > 0) {
                             <p><strong>Name:</strong> <?php echo $user['username']; ?></p>
                             <p><strong>Email:</strong> <?php echo $user['email']; ?></p>
                             <p><strong>Contact Number:</strong> <?php echo $user['mob_no']; ?></p>
-                            <p><strong>Home Address:</strong> <?php echo $user['home_address']; ?></p> <!-- Display Address -->
+                            <p><strong>Home Address:</strong> <?php echo $user['home_address']; ?></p>
+                            <!-- Display Address -->
                             <a href="edit_profile.php" class="btn btn-danger">Edit Profile</a>
                         </div>
 

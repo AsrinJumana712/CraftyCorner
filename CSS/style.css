@@ -4,7 +4,7 @@
   justify-content: space-between;
   padding: 15px;
   border-bottom: 1px solid #ddd;
-  margin-bottom: 15px; /* Adds space between cart items */
+  margin-bottom: 15px;
 }
 
 .cart-item-image {
@@ -29,7 +29,7 @@
 .cart-item-actions {
   display: flex;
   align-items: center;
-  gap: 10px; /* Adds space between quantity input and remove button */
+  gap: 10px;
 }
 
 .quantity-input {
@@ -216,7 +216,7 @@ h1 {
 }
 
 .product-card img {
-  width: 250px;
+  width: auto;
   height: 200px;
   object-fit: cover;
   border-radius: 10px;

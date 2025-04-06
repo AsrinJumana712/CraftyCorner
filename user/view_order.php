@@ -22,6 +22,7 @@ $order = $order_result->fetch_assoc();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,52 +31,55 @@ $order = $order_result->fetch_assoc();
     <script src="../bootstrap/dist/js/bootstrap.js"></script>
     <link rel="stylesheet" href="../CSS/style.css">
 </head>
+
 <body>
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="dashboard.php">Crafty<span class="header_name">Corner</span> </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>
+                    <li class="nav-item"><a class="nav-link" href="order_history.php">Orders</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../logout.php">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-<nav class="navbar navbar-expand-lg navbar-custom sticky-top">
-    <div class="container">
-        <a class="navbar-brand" href="dashboard.php">Crafty<span class="header_name">Corner</span> </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-                    <a class="nav-link" href="cart.php">Cart</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="order_history.php">Orders</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="profile.php">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../logout.php">Logout</a>
-                </li>
-            </ul>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Order Details</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-header text-white text-center rounded-top-4">
+                        <h5 class="mb-0">Order ID: <?php echo $order['order_id']; ?></h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <p class="mb-3"><strong>Product:</strong> <?php echo $order['product_name']; ?></p>
+                        <p class="mb-3"><strong>Order Date:</strong> <?php echo $order['order_date']; ?></p>
+                        <p class="mb-3"><strong>Status:</strong>
+                            <span
+                                class="badge bg-<?php echo ($order['status'] == 'Delivered') ? 'success' : 'warning'; ?>">
+                                <?php echo $order['status']; ?>
+                            </span>
+                        </p>
+                        <p class="mb-4"><strong>Total Amount:</strong> $<?php echo $order['total_amount']; ?></p>
+
+                        <a href="order_history.php" class="btn w-100">Go back</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</nav>
 
-<div class="container mt-5">
-    <h2 class="text-center mb-4">Order Details</h2>
-
-    <div class="card">
-        <div class="card-header">
-            Order ID: <?php echo $order['order_id']; ?>
-        </div>
-        <div class="card-body">
-            <p><strong>Product:</strong> <?php echo $order['product_name']; ?></p>
-            <p><strong>Order Date:</strong> <?php echo $order['order_date']; ?></p>
-            <p><strong>Status:</strong> <?php echo $order['status']; ?></p>
-            <p><strong>Total Amount:</strong> $<?php echo $order['total_amount']; ?></p>
-
-            <a href="order_history.php" class="btn btn-custom">Go back</a>
-        </div>
-    </div>
-</div>
-<div class="footer">
-      <p>&copy; 2025 Crafty Corner. All Rights Reserved.</p>
+    <div class="footer">
+        <p>&copy; 2025 Crafty Corner. All Rights Reserved.</p>
     </div>
 </body>
+
 </html>
