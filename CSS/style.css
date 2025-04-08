@@ -13,6 +13,7 @@ body {
 .hero {
   padding: 100px 30px;
   text-align: center;
+  animation: fadeIn 1.5s ease-in-out;
 }
 
 .hero h1 {
@@ -23,6 +24,75 @@ body {
 .hero p {
   font-size: 1.3rem;
   margin-top: 10px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-left {
+  opacity: 0;
+  animation: slideInLeft 1.2s forwards;
+}
+
+.slide-right {
+  opacity: 0;
+  animation: slideInRight 1.2s forwards;
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.newsletter {
+  background-color: #fff5f2;
+  padding: 40px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.social-icons i {
+  font-size: 1.5rem;
+  margin: 0 10px;
+  color: #9e3b0d;
+  transition: 0.3s;
+}
+
+.social-icons i:hover {
+  transform: scale(1.2);
+  color: #9e3b0d;
 }
 
 h1 {
@@ -296,6 +366,7 @@ a{
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin-top: 50px;
 }
+
 .success-icon {
   font-size: 60px;
   color: #28a745;
@@ -309,6 +380,12 @@ a{
 .form-check-input:checked {
   background-color: #d19275;
   border-color: #d19275;
+}
+
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus {
+  background-color: #9e3b0d !important;
+  color: #000 !important;
 }
 
 .footer {
