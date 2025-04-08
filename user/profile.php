@@ -4,11 +4,11 @@ session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION['username'])) {
-    header("Location: index.php");
+    header("Location: auth.php");
     exit;
 }
 
-// Fetch user details from the database
+// Fetch user details
 $username = $_SESSION['username'];
 $sql_user = "SELECT * FROM Users WHERE username='$username'";
 $user_result = $con->query($sql_user);
@@ -19,7 +19,6 @@ if ($user_result->num_rows > 0) {
     echo "User not found!";
     exit;
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,9 +26,9 @@ if ($user_result->num_rows > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard</title>
+    <title>Profile</title>
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css">
-    <script src="../bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../bootstrap/dist/js/bootstrap.bundle.js"></script>
     <link rel="stylesheet" href="../CSS/style.css">
 </head>
 
@@ -41,45 +40,63 @@ if ($user_result->num_rows > 0) {
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>
-                    <li class="nav-item"><a class="nav-link" href="order_history.php">Orders</a></li>
-                    <li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../logout.php">Logout</a></li>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item px-3">
+                        <a class="nav-link" href="cart.php">Cart</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a class="nav-link" href="order_history.php">Orders</a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <a class="nav-link" href="send_feedback.php">Feedbacks</a>
+                    </li>
                 </ul>
             </div>
+            <ul class="navbar-nav ms-auto me-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <?php
+                        $nav_profile_image = !empty($user['ProfilePicture']) ? "../uploads/" . $user['ProfilePicture'] : "../uploads/default.png";
+                        ?>
+                        <img src="<?php echo $nav_profile_image; ?>" alt="Profile" class="rounded-circle"
+                            style="height: 32px; width: 32px; object-fit: cover;"></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="profile.php">Profile</a></li>
+                        <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </nav>
 
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <div class="card">
+                <div class="card shadow">
                     <div class="card-body text-center">
-                        <div class="card-custom-header">Your Profile</div>
-                        <div class="card-body card-body-custom text-center">
-                            <?php
-                            $profile_image = !empty($user['ProfilePicture']) ? "../uploads/" . $user['ProfilePicture'] : "../uploads/default.png";
-                            ?>
-                            <img src="<?php echo $profile_image; ?>" class="rounded-circle mb-3" alt="Profile Picture"
-                                width="150" height="150">
-                            <p><strong>Name:</strong> <?php echo $user['username']; ?></p>
-                            <p><strong>Email:</strong> <?php echo $user['email']; ?></p>
-                            <p><strong>Contact Number:</strong> <?php echo $user['mob_no']; ?></p>
-                            <p><strong>Home Address:</strong> <?php echo $user['home_address']; ?></p>
-                            <!-- Display Address -->
-                            <a href="edit_profile.php" class="btn btn-danger">Edit Profile</a>
-                        </div>
-
+                        <h4 class="mb-4">Your Profile</h4>
+                        <?php
+                        $profile_image = !empty($user['ProfilePicture']) ? "../uploads/" . $user['ProfilePicture'] : "../uploads/default.png";
+                        ?>
+                        <img src="<?php echo $profile_image; ?>" class="rounded-circle mb-3" alt="Profile Picture"
+                            width="150" height="150">
+                        <p><strong>Name:</strong> <?php echo htmlspecialchars($user['username']); ?></p>
+                        <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
+                        <p><strong>Contact Number:</strong> <?php echo htmlspecialchars($user['mob_no']); ?></p>
+                        <p><strong>Home Address:</strong> <?php echo htmlspecialchars($user['home_address']); ?></p>
+                        <a href="edit_profile.php" class="btn mt-3">Edit Profile</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="footer">
         <p>&copy; 2025 Crafty Corner. All Rights Reserved.</p>
     </div>
+
 </body>
 
 </html>
