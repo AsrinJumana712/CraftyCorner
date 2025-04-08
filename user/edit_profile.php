@@ -11,7 +11,7 @@ if (!isset($_SESSION['username'])) {
 $username = $_SESSION['username'];
 
 // Fetch user data
-$sql_user = "SELECT * FROM Users WHERE username='$username'";
+$sql_user = "SELECT * FROM users WHERE username='$username'";
 $user_result = $con->query($sql_user);
 $user = $user_result->fetch_assoc();
 
@@ -49,7 +49,7 @@ if (isset($_POST['update'])) {
     }
 
     // Update User Data
-    $sql_update = "UPDATE Users SET email='$email', mob_no='$mob_no' , home_address='$home_address' $password_update $profile_picture_update WHERE username='$username'";
+    $sql_update = "UPDATE users SET email='$email', mob_no='$mob_no' , home_address='$home_address' $password_update $profile_picture_update WHERE username='$username'";
 
     if ($con->query($sql_update) === TRUE) {
         echo "<p class='text-success text-center'>Profile updated successfully!</p>";

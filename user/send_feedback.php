@@ -10,7 +10,7 @@ if (!isset($_SESSION['username'])) {
 
 // Retrieve user ID from session or database
 $username = $_SESSION['username'];
-$sql_user = "SELECT * FROM Users WHERE username='$username'";
+$sql_user = "SELECT * FROM users WHERE username='$username'";
 $user_result = $con->query($sql_user);
 $user = $user_result->fetch_assoc();
 
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_feedback'])) {
     $feedback = trim($_POST['feedback']);
     if (!empty($feedback)) {
         // Insert feedback into the Feedbacks table
-        $sql_insert = "INSERT INTO Feedbacks (user_id, feedback, submitted_at) VALUES ((SELECT id FROM Users WHERE username = ?), ?, NOW())";
+        $sql_insert = "INSERT INTO feedbacks (user_id, feedback, submitted_at) VALUES ((SELECT id FROM users WHERE username = ?), ?, NOW())";
         $stmt_insert = $con->prepare($sql_insert);
         $stmt_insert->bind_param("ss", $_SESSION['username'], $feedback);
         $stmt_insert->execute();
@@ -32,8 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_feedback'])) {
 
 // Fetch user feedbacks
 $sql = "SELECT f.id, f.feedback, f.submitted_at, f.reply 
-        FROM Feedbacks f 
-        WHERE f.user_id = (SELECT id FROM Users WHERE username = ?) 
+        FROM feedbacks f 
+        WHERE f.user_id = (SELECT id FROM users WHERE username = ?) 
         ORDER BY f.submitted_at DESC";
 $stmt = $con->prepare($sql);
 $stmt->bind_param("s", $_SESSION['username']);

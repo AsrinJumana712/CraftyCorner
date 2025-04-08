@@ -10,14 +10,14 @@ if (!isset($_SESSION['username'])) {
 
 // Retrieve user ID from session or database
 $username = $_SESSION['username'];
-$sql_user = "SELECT * FROM Users WHERE username='$username'";
+$sql_user = "SELECT * FROM users WHERE username='$username'";
 $user_result = $con->query($sql_user);
 $user = $user_result->fetch_assoc();
 
 // Fetch all orders for the user with product details
 $sql_orders = "SELECT o.order_id, o.order_date, o.status, o.total_amount, p.product_name, p.image, o.quantity
-               FROM Orders o
-               JOIN Products p ON o.product_id = p.id
+               FROM orders o
+               JOIN products p ON o.product_id = p.id
                WHERE o.user_id = '" . $user['id'] . "' 
                ORDER BY o.order_date DESC";
 $orders_result = $con->query($sql_orders);
@@ -76,8 +76,7 @@ $orders_result = $con->query($sql_orders);
 
     <div class="container mt-5">
         <h2 class="text-center mb-5">Order History</h2>
-
-        <div class="row">
+        <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
             <?php if ($orders_result->num_rows > 0) {
                 while ($order = $orders_result->fetch_assoc()) { ?>
                     <div class="col-md-4 mb-4">

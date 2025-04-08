@@ -10,7 +10,7 @@ if (!isset($_SESSION['username'])) {
 
 // Retrieve user ID from session or database
 $username = $_SESSION['username'];
-$sql_user = "SELECT * FROM Users WHERE username='$username'";
+$sql_user = "SELECT * FROM users WHERE username='$username'";
 $user_result = $con->query($sql_user);
 $user = $user_result->fetch_assoc();
 
@@ -18,9 +18,9 @@ $order_id = $_GET['id'];
 
 // Fetch order details
 $sql_order = "SELECT o.order_id, o.order_date, o.status, o.total_amount, p.product_name 
-              FROM Orders o 
-              JOIN Products p ON o.product_id = p.id 
-              WHERE o.order_id = $order_id AND o.user_id = (SELECT id FROM Users WHERE username='$username')";
+              FROM orders o 
+              JOIN products p ON o.product_id = p.id 
+              WHERE o.order_id = $order_id AND o.user_id = (SELECT id FROM users WHERE username='$username')";
 $order_result = $con->query($sql_order);
 $order = $order_result->fetch_assoc();
 ?>

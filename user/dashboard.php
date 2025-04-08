@@ -10,7 +10,7 @@ if (!isset($_SESSION['username'])) {
 
 // Fetch user details
 $username = $_SESSION['username'];
-$sql_user = "SELECT * FROM Users WHERE username='$username'";
+$sql_user = "SELECT * FROM users WHERE username='$username'";
 $user_result = $con->query($sql_user);
 
 if ($user_result->num_rows > 0) {
@@ -24,9 +24,9 @@ if ($user_result->num_rows > 0) {
 $search_query = "";
 if (isset($_GET['search'])) {
     $search_query = $con->real_escape_string($_GET['search']);
-    $sql_products = "SELECT * FROM Products WHERE status='Available' AND (product_name LIKE '%$search_query%' OR description LIKE '%$search_query%')";
+    $sql_products = "SELECT * FROM products WHERE status='Available' AND (product_name LIKE '%$search_query%' OR description LIKE '%$search_query%')";
 } else {
-    $sql_products = "SELECT * FROM Products WHERE status='Available'";
+    $sql_products = "SELECT * FROM products WHERE status='Available'";
 }
 
 $result = $con->query($sql_products);
@@ -45,7 +45,7 @@ $result = $con->query($sql_products);
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
         <div class="container">
             <a class="navbar-brand" href="dashboard.php">Crafty<span class="header_name">Corner</span> </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -82,7 +82,7 @@ $result = $con->query($sql_products);
             </ul>
         </div>
     </nav>
-    
+
     <div class="container mt-4">
         <h2 class="text-center">Welcome, <?php echo $username; ?>🤩</h2>
         <p class="text-center">Browse and purchase our homemade products.</p>
@@ -90,8 +90,8 @@ $result = $con->query($sql_products);
         <!-- Search Form -->
         <form method="GET" action="dashboard.php" class="mb-4">
             <div class="input-group">
-                <input type="text" name="search" class="form-control" placeholder="Search for products..."
-                    value="<?php echo($search_query); ?>">
+                <input type="text" name="search" class="form-control" placeholder="Search items..."
+                    value="<?php echo ($search_query); ?>">
                 <button type="submit" class="btn">Search</button>
             </div>
         </form>
@@ -111,7 +111,17 @@ $result = $con->query($sql_products);
                             <img src="<?php echo $image_path; ?>" class="product-image"
                                 alt="<?php echo $row['product_name']; ?>">
                             <h5 class="mt-3"><?php echo $row['product_name']; ?></h5>
-                            <p><?php echo($row['description'] ?? ''); ?></p>
+
+                            <?php
+                            $fullDesc = $row['description'] ?? '';
+                            $shortDesc = substr($fullDesc, 0, 60); // show first 60 characters
+                            ?>
+                            <p class="product-description">
+                                <span class="short"><?php echo($shortDesc); ?>...</span>
+                                <span class="full d-none"><?php echo($fullDesc); ?></span>
+                                <a href="#" class="read-more-link">Read More</a>
+                            </p>
+
                             <form action="cart.php" method="post" class="d-inline">
                                 <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
                                 <input type="hidden" name="product_name" value="<?php echo $row['product_name']; ?>">
@@ -134,6 +144,7 @@ $result = $con->query($sql_products);
         <div class="footer">
             <p>&copy; 2025 Crafty Corner. All Rights Reserved.</p>
         </div>
+        <script src="../JavaScript/script.js"></script>
 
 </body>
 

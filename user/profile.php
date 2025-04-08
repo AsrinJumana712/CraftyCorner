@@ -10,7 +10,7 @@ if (!isset($_SESSION['username'])) {
 
 // Fetch user details
 $username = $_SESSION['username'];
-$sql_user = "SELECT * FROM Users WHERE username='$username'";
+$sql_user = "SELECT * FROM users WHERE username='$username'";
 $user_result = $con->query($sql_user);
 
 if ($user_result->num_rows > 0) {
@@ -82,10 +82,10 @@ if ($user_result->num_rows > 0) {
                         ?>
                         <img src="<?php echo $profile_image; ?>" class="rounded-circle mb-3" alt="Profile Picture"
                             width="150" height="150">
-                        <p><strong>Name:</strong> <?php echo htmlspecialchars($user['username']); ?></p>
-                        <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
-                        <p><strong>Contact Number:</strong> <?php echo htmlspecialchars($user['mob_no']); ?></p>
-                        <p><strong>Home Address:</strong> <?php echo htmlspecialchars($user['home_address']); ?></p>
+                        <p><strong>Name:</strong> <?php echo($user['username']); ?></p>
+                        <p><strong>Email:</strong> <?php echo($user['email']); ?></p>
+                        <p><strong>Contact Number:</strong> <?php echo($user['mob_no']); ?></p>
+                        <p><strong>Home Address:</strong> <?php echo($user['home_address']); ?></p>
                         <a href="edit_profile.php" class="btn mt-3">Edit Profile</a>
                     </div>
                 </div>

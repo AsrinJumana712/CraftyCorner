@@ -10,7 +10,7 @@ if (!isset($_SESSION['username'])) {
 
 // Retrieve user ID from session or database
 $username = $_SESSION['username'];
-$sql_user = "SELECT * FROM Users WHERE username='$username'";
+$sql_user = "SELECT * FROM users WHERE username='$username'";
 $user_result = $con->query($sql_user);
 $user = $user_result->fetch_assoc();
 

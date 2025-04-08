@@ -10,7 +10,7 @@ if (!isset($_SESSION['username'])) {
 
 // Retrieve user details
 $username = $_SESSION['username'];
-$sql_user = "SELECT username, email, mob_no, home_address, ProfilePicture FROM Users WHERE username=?";
+$sql_user = "SELECT username, email, mob_no, home_address, ProfilePicture FROM users WHERE username=?";
 $stmt = $con->prepare($sql_user);
 $stmt->bind_param("s", $username);
 $stmt->execute();
@@ -66,7 +66,7 @@ $payment_methods = [
     <link rel="stylesheet" href="../CSS/style.css">
 </head>
 
-<body class="bg-light">
+<body>
 <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
         <div class="container">
             <a class="navbar-brand" href="dashboard.php">Crafty<span class="header_name">Corner</span> </a>

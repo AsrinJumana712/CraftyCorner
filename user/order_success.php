@@ -16,7 +16,7 @@ if (empty($_SESSION['cart'])) {
 
 // Fetch the logged-in user's information
 $username = $_SESSION['username'];
-$sql_user = "SELECT * FROM Users WHERE username='$username'";
+$sql_user = "SELECT * FROM users WHERE username='$username'";
 $user_result = $con->query($sql_user);
 
 if ($user_result->num_rows > 0) {
@@ -37,7 +37,7 @@ foreach ($_SESSION['cart'] as $product_id => $product) {
     $total_amount += $subtotal;
 
     // Insert the order into the Orders table
-    $sql_order = "INSERT INTO Orders (user_id, product_id, quantity, total_amount, status, order_date)
+    $sql_order = "INSERT INTO orders (user_id, product_id, quantity, total_amount, status, order_date)
                   VALUES ('$user_id', '$product_id', '$quantity', '$subtotal', 'Pending', NOW())";
     if (!$con->query($sql_order)) {
         header("Location: checkout.php");
