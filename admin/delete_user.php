@@ -21,13 +21,13 @@ try {
     $con->begin_transaction();
 
     // Delete all orders related to the user
-    $delete_orders_query = "DELETE FROM Orders WHERE user_id = ?";
+    $delete_orders_query = "DELETE FROM orders WHERE user_id = ?";
     $stmt_orders = $con->prepare($delete_orders_query);
     $stmt_orders->bind_param('i', $user_id);
     $stmt_orders->execute();
 
     // Delete the user
-    $delete_user_query = "DELETE FROM Users WHERE id = ?";
+    $delete_user_query = "DELETE FROM users WHERE id = ?";
     $stmt_user = $con->prepare($delete_user_query);
     $stmt_user->bind_param('i', $user_id);
     $stmt_user->execute();
