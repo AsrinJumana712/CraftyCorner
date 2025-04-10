@@ -15,7 +15,7 @@
     <section class="hero">
         <h1>Welcome to CraftyCorner</h1>
         <p>Locally crafted, naturally beautiful. From our hands to your heart.</p>
-        <a href="auth.php" class="btn">Shop Now</a>
+        <a href="signin.php" class="btn">Shop Now</a>
     </section>
 
     <section class="container my-5">
@@ -65,7 +65,7 @@
             <div class="col-md-4">
                 <i class="fas fa-hand-holding-heart fa-2x text-danger mb-2"></i>
                 <h5>Handmade with Love</h5>
-                <p>WEvery item is crafted with attention, care, and a personal touch.</p>
+                <p>Every item is crafted with attention, care, and a personal touch.</p>
             </div>
 
             <div class="col-md-4">

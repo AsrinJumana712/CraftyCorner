@@ -95,6 +95,30 @@ html {
   color: #9e3b0d;
 }
 
+.auth-container {
+  min-height: 100vh;
+}
+
+.form-control {
+  border-radius: 0.75rem;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 50px;
+}
+
+.social-btn i {
+  font-size: 15px;
+}
+
+.error-msg {
+  color: red;
+  font-size: 0.9rem;
+}
+
 h1 {
   font-size: 2.5rem;
   font-weight: bold;

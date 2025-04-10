@@ -1,7 +1,7 @@
 <?php
 $server="localhost";
 $db_username="root";
-$db_password="";
+$db_password="asr@712jmn100";
 $db_name="home_products";
 
 $con=mysqli_connect($server,$db_username,$db_password,$db_name);
