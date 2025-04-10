@@ -2,9 +2,9 @@
 require('../config.php');
 session_start();
 
-// Ensure the user is logged in
+// Check if the user is logged in
 if (!isset($_SESSION['username'])) {
-    header("Location: auth.php");
+    header("Location: signin.php");
     exit;
 }
 

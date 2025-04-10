@@ -4,8 +4,8 @@ session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION['username'])) {
-    header("Location: auth.php");
-    exit();
+    header("Location: signin.php");
+    exit;
 }
 
 // Check if the cart is empty

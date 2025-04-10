@@ -4,7 +4,7 @@ session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION['username'])) {
-    header("Location: auth.php");
+    header("Location: signin.php");
     exit;
 }
 

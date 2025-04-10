@@ -2,6 +2,12 @@
 require('../config.php');
 session_start();
 
+// Check if the user is logged in
+if (!isset($_SESSION['username'])) {
+    header("Location: signin.php");
+    exit;
+}
+
 // Initialize cart and selected items if not set
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
