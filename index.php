@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" />
     <script src="../bootstrap/dist/js/bootstrap.bundle.js"></script>
     <link rel="stylesheet" href="../CSS/style.css" />
+    <script src="../JavaScript/script.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 </head>
 
