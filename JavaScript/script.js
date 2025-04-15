@@ -13,7 +13,9 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".select-item:checked").forEach((checkbox) => {
       const item = checkbox.closest(".cart-item");
       const productName = item.querySelector("h5").innerText;
-      const price = parseFloat(item.querySelector(".price").innerText.replace("LKR ", ""));
+      const price = parseFloat(
+        item.querySelector(".price").innerText.replace("LKR ", "")
+      );
       const qty = parseInt(item.querySelector(".quantity-input").value);
       const subtotal = price * qty;
       total += subtotal;
@@ -22,7 +24,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const productItem = document.createElement("p");
       productItem.innerHTML = `
         <span class="product-name">${productName}</span>
-        <span class="price-details" style="margin-left: 10px;"><br> LKR ${price.toFixed(2)} x ${qty}</span>
+        <span class="price-details" style="margin-left: 10px;"><br> LKR ${price.toFixed(
+          2
+        )} x ${qty}</span>
         = <strong>LKR ${subtotal.toFixed(2)}</strong>`;
       selectedProducts.appendChild(productItem);
     });
@@ -38,13 +42,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const maxQuantity = parseInt(quantityInput.getAttribute("data-max"));
     const newQuantity = currentQuantity + change;
 
-    if (newQuantity >= 1 && newQuantity <= maxQuantity && newQuantity !== currentQuantity) {
+    if (
+      newQuantity >= 1 &&
+      newQuantity <= maxQuantity &&
+      newQuantity !== currentQuantity
+    ) {
       quantityInput.value = newQuantity;
 
       fetch("cart.php", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `product_id=${productId}&quantity=${newQuantity}`
+        body: `product_id=${productId}&quantity=${newQuantity}`,
       })
         .then((response) => response.text())
         .then(() => updateSelectedTotal())
@@ -70,7 +78,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // Event: Quantity increase/decrease
   document.querySelectorAll(".btn-quantity").forEach((button) => {
     button.addEventListener("click", function () {
-      const quantityInput = this.closest(".quantity-selector").querySelector(".quantity-input");
+      const quantityInput =
+        this.closest(".quantity-selector").querySelector(".quantity-input");
       const productId = quantityInput.id.replace("quantity_", "");
       const change = this.classList.contains("increase") ? 1 : -1;
       changeQuantity(productId, change);
@@ -84,7 +93,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const parent = this.closest(".product-description");
       parent.querySelector(".short").classList.toggle("d-none");
       parent.querySelector(".full").classList.toggle("d-none");
-      this.textContent = this.textContent === "Read More" ? "Show Less" : "Read More";
+      this.textContent =
+        this.textContent === "Read More" ? "Show Less" : "Read More";
     });
   });
 
@@ -101,6 +111,24 @@ function confirmOrder() {
 
 // Hide the reply textarea after admin message submission
 function hideTextarea(feedbackId) {
-  const replyContainer = document.getElementById('reply-container-' + feedbackId);
-  if (replyContainer) replyContainer.style.display = 'none';
+  const replyContainer = document.getElementById(
+    "reply-container-" + feedbackId
+  );
+  if (replyContainer) replyContainer.style.display = "none";
 }
+
+const firebaseConfig = { /* your config */ };
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const provider = new firebase.auth.GoogleAuthProvider();
+
+// Then use signInWithPopup like:
+auth.signInWithPopup(provider)
+  .then((result) => {
+    const user = result.user;
+    console.log(user);  // Check the user details in the console
+    // Further actions after successful login can go here
+  })
+  .catch((error) => {
+    console.error("Error during Google Sign-In:", error);
+  });
