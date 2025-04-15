@@ -42,6 +42,11 @@ ob_end_flush();
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" />
     <script src="../bootstrap/dist/js/bootstrap.bundle.js"></script>
     <link rel="stylesheet" href="../CSS/style.css" />
+    <script src="../JavaScript/script.js"></script>
+    <script type="module" src="../JavaScript/google-login.js"></script>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <style>
         .bg-image-signup {
@@ -103,10 +108,10 @@ ob_end_flush();
                         </form><br>
 
                         <div class="d-flex justify-content-center gap-3 mt-2">
-                            <a href="#" class="btn rounded-circle p-3"
+                            <button class="btn rounded-circle p-3"  id="google-login-btn"
                                 style="width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; transition: all 0.3s ease-in-out;">
                                 <i class="fab fa-google" style="font-size: 22px;"></i>
-                            </a>
+                            </button>
                             <a href="#" class="btn rounded-circle p-3"
                                 style="width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; transition: all 0.3s ease-in-out;">
                                 <i class="fab fa-facebook-f" style="font-size: 22px;"></i>
