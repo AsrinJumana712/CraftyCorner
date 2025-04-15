@@ -37,6 +37,11 @@ if (isset($_POST['signin'])) {
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" />
     <script src="../bootstrap/dist/js/bootstrap.bundle.js"></script>
     <link rel="stylesheet" href="../CSS/style.css" />
+    <script src="../JavaScript/script.js"></script>
+    <script type="module" src="../JavaScript/google-login.js"></script>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <style>
         .bg-image-login {
@@ -63,8 +68,11 @@ if (isset($_POST['signin'])) {
                         } ?>
 
                         <div class="d-flex gap-2 mb-4 ">
-                            <a href="#" class="btn social-btn"><i class="fab fa-google"></i> Google</a>
-                            <a href="#" class="btn social-btn"><i class="fab fa-facebook-f"></i> Facebook</a>
+                            <button class="btn social-btn" id="google-login-btn">
+                                <i class="fab fa-google"></i> Google
+                            </button>
+                            <button class="btn social-btn" id="google-login-btn"><i class="fab fa-facebook-f"></i>
+                                Facebook</a>
                         </div>
 
                         <form method="post" action="">
